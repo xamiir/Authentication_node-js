@@ -17,7 +17,7 @@ router.post('/register', async (req, res, next) => {
         const hash = bcrypt.hashSync(password, 10)
         console.log("hash", hash)
         // Database-ka gali
-        await Users.add({ username, password: hash });
+        await Users.add({ username, password: hash});
 
         res.status(201).json({ message: `You are now registered, ${username}!` });
 
@@ -34,7 +34,7 @@ router.post('/login', async (req, res, next) => {
             next({ status: 401, message: "User does not exist!" });
             return;
         }
-
+       
         if(bcrypt.compareSync(password, existingUser.password) == false) {
             next({ status: 401, message: "Invalid Credentials" });
             return;
